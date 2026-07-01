@@ -26,30 +26,30 @@ document.getElementById('bmiForm').addEventListener('submit', function (e) {
     let category, message, cardClass;
 
     // BMI Classification
-switch (true) {
-    case bmi < 18.5:
-        category = 'Underweight';
-        cardClass = 'underweight';
-        message = 'Consider a balanced, calorie-sufficient diet.';
-        break;
+    switch (true) {
+        case bmi < 18.5:
+            category = 'Underweight';
+            cardClass = 'underweight';
+            message = 'Consider a balanced, calorie-sufficient diet.';
+            break;
 
-    case bmi < 25:
-        category = 'Normal';
-        cardClass = 'normal';
-        message = 'Great! Keep up your healthy habits.';
-        break;
+        case bmi < 25:
+            category = 'Normal';
+            cardClass = 'normal';
+            message = 'Great! Keep up your healthy habits.';
+            break;
 
-    case bmi < 30:
-        category = 'Overweight';
-        cardClass = 'overweight';
-        message = 'Consider more physical activity and mindful eating.';
-        break;
+        case bmi < 30:
+            category = 'Overweight';
+            cardClass = 'overweight';
+            message = 'Consider more physical activity and mindful eating.';
+            break;
 
-    default:
-        category = 'Obese';
-        cardClass = 'obese';
-        message = 'We recommend consulting a healthcare provider.';
-}
+        default:
+            category = 'Obese';
+            cardClass = 'obese';
+            message = 'We recommend consulting a healthcare provider.';
+    }
 
     // Display result
     showResult(name, bmi, category, message, cardClass);
@@ -72,13 +72,17 @@ switch (true) {
 function showResult(name, bmi, category, message, cardClass) {
     const resultCard = document.getElementById('resultCard');
 
-    resultCard.classList.remove(
+    const classes = [
         'hidden',
         'underweight',
         'normal',
         'overweight',
         'obese'
-    );
+    ];
+
+    for (let i = 0; i < classes.length; i++) {
+        resultCard.classList.remove(classes[i]);
+    }
 
     resultCard.classList.add(cardClass);
 
@@ -89,7 +93,6 @@ function showResult(name, bmi, category, message, cardClass) {
         <p>${message}</p>
     `;
 
-    // Restart animation every calculation
     resultCard.style.animation = 'none';
     resultCard.offsetHeight;
     resultCard.style.animation = 'resultReveal 0.6s ease-out';
@@ -121,12 +124,17 @@ document.getElementById('resetBtn').addEventListener('click', function () {
     const resultCard = document.getElementById('resultCard');
 
     resultCard.classList.add('hidden');
-    resultCard.classList.remove(
+    const classes = [
+        'hidden',
         'underweight',
         'normal',
         'overweight',
         'obese'
-    );
+    ];
+
+    for (let i = 0; i < classes.length; i++) {
+        resultCard.classList.remove(classes[i]);
+    }
 
     resultCard.innerHTML = '';
 });
